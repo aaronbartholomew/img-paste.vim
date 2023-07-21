@@ -210,10 +210,7 @@ function! mdip#MarkdownClipboardImage()
     while  1
         let workdir = s:SafeMakeDir()
         " change temp-file-name and image-name
-        let g:mdip_tmpname = s:InputName()
-        if empty(g:mdip_tmpname)
-          let g:mdip_tmpname = g:mdip_imgname . '_' . s:RandomName()
-        endif
+        let g:mdip_tmpname = g:mdip_imgname . '_' . s:RandomName()
         let testpath =  workdir . '/' . g:mdip_tmpname . '.png'
         if filereadable(testpath) == 0
             break
