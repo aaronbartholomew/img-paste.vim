@@ -32,11 +32,12 @@ function! s:SaveFileTMPWSL(imgdir, tmpname) abort
     let tmpfile = substitute(tmpfile, "\/", "\\\\\\", "g")
     if tmpfile =~ "mnt"
         let tmpfile = substitute(tmpfile, "\\\\\\\\mnt\\\\\\\\c", "C:", "g")
+        let tmpfile = substitute(tmpfile, "\\\\\\\\mnt\\\\\\\\d", "D:", "g")
     else
         let tmpfile = '\\\\wsl\$\\Ubuntu'.tmpfile
     endif
 
-    let clip_command = 'powershell.exe -nologo -noprofile -noninteractive -sta "Add-Type -Assembly PresentationCore;'.
+    let clip_command = 'powershell.exe -nologo -noprofile -noninteractive -sta -command "Add-Type -Assembly PresentationCore;'.
           \'\$img = [Windows.Clipboard]::GetImage();'.
           \'if (\$img -eq \$null) {'.
           \'echo "Do not contain image.";'.
